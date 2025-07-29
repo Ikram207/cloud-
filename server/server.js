@@ -1,16 +1,18 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
-const cors = require("cors"); // ✅ Ajouté pour autoriser les requêtes du front
+const cors = require("cors");
 
 const app = express();
-const PORT = 5000;
-
+const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI;
+
 console.log("MONGO_URI =", MONGO_URI);
 
-// Middlewares
-app.use(cors()); // ✅ Permet la communication avec le frontend React
+// Middleware pour autoriser CORS (cross-origin requests)
+app.use(cors());
+
+// Middleware pour parser le JSON dans le corps des requêtes
 app.use(express.json());
 
 // Modèle Mongoose User
@@ -27,7 +29,8 @@ app.get("/users", async (req, res) => {
     const users = await User.find();
     res.json(users);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error("Erreur lors de la récupération :", err);
+    res.status(500).json({ error: "Erreur serveur interne" });
   }
 });
 

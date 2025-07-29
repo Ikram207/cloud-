@@ -1,8 +1,11 @@
-# Projet MERN - Gestion des Utilisateurs
+## Déploiement sur Microsoft Azure
 
-Ce projet est une application simple MERN (MongoDB, Express, React, Node.js) permettant de gérer une liste d’utilisateurs avec leurs noms, âges et plats préférés.
-
----
-
-## Structure du projet
-
+1. Crée un compte Azure et connecte-toi au portail Azure.
+2. Crée un service « Application Web » dans un groupe de ressources.
+3. Dans la configuration de l’application web Azure, ajoute les variables d’environnement suivantes :
+   - MONGO_URI : ta chaîne de connexion MongoDB Atlas
+   - PORT : 5000
+4. Prépare le build frontend :
+   ```bash
+   cd client
+   npm run build
